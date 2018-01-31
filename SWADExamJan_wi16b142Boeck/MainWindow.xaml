@@ -1,0 +1,61 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ignore="http://www.galasoft.ch/ignore"
+        xmlns:Converter="clr-namespace:SWADExamJan_wi16b142Boeck.Converter" x:Class="SWADExamJan_wi16b142Boeck.MainWindow"
+        mc:Ignorable="d ignore"
+        Height="350"
+        Width="525"
+        Title="SWAD Exam (Server) by Sascha Böck (wi16b142)"
+        >
+
+    <Window.Resources>
+        <Converter:ShipToBrush x:Key="ShipToBrush"/>
+    </Window.Resources>
+    <Window.DataContext>
+        <Binding Path="Main" Source="{StaticResource Locator}"/>
+    </Window.DataContext>
+
+    <Grid>
+        <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+            <ItemsControl Margin="5" ItemsSource="{Binding Ships}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Width="150" Height="150" BorderBrush="Black" BorderThickness="1">
+                            <StackPanel>
+                                <TabPanel>
+                                    <Label Content="ShipID:"/>
+                                    <Label Content="{Binding ID}"/>
+                                    <Ellipse Fill="{Binding Typ, Converter={StaticResource ShipToBrush}}" Width="15" Height="15"/>
+                                </TabPanel>
+                                <StackPanel>
+                                    <TabPanel>
+                                        <Label Content="Heading"/>
+                                        <Label Content="{Binding Heading}"/>
+                                    </TabPanel>
+                                    <TabPanel>
+                                        <Label Content="Longitude"/>
+                                        <Label Content="{Binding Longitude}"/>
+                                    </TabPanel>
+                                    <TabPanel>
+                                        <Label Content="Altitude"/>
+                                        <Label Content="{Binding Altitude}"/>
+                                    </TabPanel>
+                                </StackPanel>
+                                <Label Content="{Binding Message}" Height="50"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+    </Grid>
+</Window>

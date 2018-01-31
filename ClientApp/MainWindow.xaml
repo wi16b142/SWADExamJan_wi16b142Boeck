@@ -1,0 +1,66 @@
+﻿<Window x:Class="ClientApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ignore="http://www.galasoft.ch/ignore"
+        mc:Ignorable="d ignore"
+        Height="350"
+        Width="525"
+        Title="SWAD Exam (Client) by Sascha Böck (wi16b142)"
+        DataContext="{Binding Main, Source={StaticResource Locator}}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="53*"/>
+            <ColumnDefinition Width="21*"/>
+        </Grid.ColumnDefinitions>
+
+        <Button Command="{Binding ConnectBtnClick, UpdateSourceTrigger=PropertyChanged}" Content="Conncet" Grid.Column="1" Width="100" Height="50"/>
+
+        <Button Command="{Binding SendBtnClick, UpdateSourceTrigger=PropertyChanged}" Content="Send" Grid.Row="2" Grid.Column="1" Width="100" Height="50"/>
+
+        <StackPanel Margin="2">
+            <TabPanel Margin="2">
+                <Label Content="ID: " Width="100"/>
+                <TextBox Text="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Width="200" IsReadOnly="{Binding IsConnected}"></TextBox>
+            </TabPanel>
+            <TabPanel Margin="2">
+                <Label Content="Typ: " Width="100"/>
+                <ComboBox ItemsSource="{Binding Types}" SelectedItem="{Binding Typ, UpdateSourceTrigger=PropertyChanged}" Width="200" IsReadOnly="{Binding IsConnected}"></ComboBox>
+            </TabPanel>
+            <TabPanel Margin="2">
+                <Label Content="Subm. Int: " Width="100"/>
+                <TextBox  Text="{Binding Interval, UpdateSourceTrigger=PropertyChanged}" Width="200" IsReadOnly="{Binding IsConnected}"></TextBox>
+            </TabPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Margin="2">
+            <TabPanel Margin="2">
+                <Label Content="Heading: " Width="100"/>
+                <ComboBox ItemsSource="{Binding Headings}" SelectedItem="{Binding Heading, UpdateSourceTrigger=PropertyChanged}" Width="200"></ComboBox>
+            </TabPanel>
+            <TabPanel Margin="2">
+                <Label Content="Longitude: " Width="100"/>
+                <TextBox Text="{Binding Longitude, UpdateSourceTrigger=PropertyChanged}" Width="200"></TextBox>
+            </TabPanel>
+            <TabPanel Margin="2">
+                <Label Content="Altitude: " Width="100"/>
+                <TextBox Text="{Binding Altitude, UpdateSourceTrigger=PropertyChanged}" Width="200"></TextBox>
+            </TabPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Margin="2">
+            <TabPanel>
+                <Label Content="Message:" Width="100"/>
+                <TextBox Text="{Binding Message, UpdateSourceTrigger=PropertyChanged}" Width="200" Height="70"/>
+            </TabPanel>
+        </StackPanel>
+
+    </Grid>
+</Window>
